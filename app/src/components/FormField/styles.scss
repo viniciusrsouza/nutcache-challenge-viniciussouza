@@ -3,13 +3,12 @@
 .form-field {
   display: flex;
   background-color: colors.$whiteVariant;
-  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 30px;
   margin: 10px;
   padding: 0.4em;
   border: 1px solid colors.$primary;
 
-  input {
+  .input {
     border: none;
     outline: none;
     width: 100%;
