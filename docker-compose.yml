@@ -1,0 +1,12 @@
+services:
+  app:
+    container_name: NUTCACHE_REACT_APP
+    build:
+      context: ./app
+      dockerfile: dockerfile
+    environment:
+      - PORT=4000
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./app/:/usr/src/app
