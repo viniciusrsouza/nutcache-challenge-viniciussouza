@@ -1,6 +1,5 @@
-@use "./themes/light" as theme;
-
 .App {
   width: 100vw;
   height: 100vh;
+  background: theme(backgroundLight);
 }
