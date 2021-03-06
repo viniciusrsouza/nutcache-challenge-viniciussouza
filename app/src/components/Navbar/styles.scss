@@ -1,0 +1,33 @@
+@use '../../themes/colors.scss' as colors;
+
+#navbar-container {
+  display: flex;
+  background-color: colors.$primary;
+  justify-content: space-between;
+}
+
+#navbar-search-bar {
+  display: inline-flex;
+  align-items: center;
+}
+
+#navbar-search-bar-input {
+  outline: none;
+  border: none;
+  width: 15em;
+  height: 1.5em;
+  font-size: 1em;
+}
+
+.navbar-icon {
+  height: 32px;
+  width: 32px;
+  padding: 0.2em;
+  margin: 0 0.5em;
+  transition: 300ms;
+
+  &:hover {
+    background: colors.$primary-focus;
+    transition: 300ms;
+  }
+}

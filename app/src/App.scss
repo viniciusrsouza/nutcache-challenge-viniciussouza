@@ -1,5 +1,9 @@
+@use 'themes/colors.scss' as colors;
+
 .App {
+  display: flex;
   width: 100vw;
   height: 100vh;
-  background: theme(backgroundLight);
+  justify-content: center;
+  background: colors.$whiteVariant;
 }
