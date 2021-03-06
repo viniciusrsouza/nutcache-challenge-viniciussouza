@@ -1,5 +1,6 @@
 import Dialog from "../Dialog";
 import "./styles.scss";
+import { api } from "../../services/ApiService";
 
 import {
   FaUser,
@@ -26,11 +27,13 @@ function CreateEmployeeDialog({
   ...props
 }) {
   useEffect(() => {
-    if (form.saving) onFormSave({ ...form, saving: false });
+    //if (form.saving) onFormSave({ ...form, saving: false });
   });
 
   if (form.saving) {
-    console.log(form);
+    api.post("/nutemployee", form.employee).then((response) => {
+      onFormSave({ ...form, saving: false });
+    });
   }
 
   let dismiss = () => {
