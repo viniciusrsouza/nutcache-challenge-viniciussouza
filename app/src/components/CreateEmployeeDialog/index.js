@@ -33,6 +33,7 @@ function CreateEmployeeDialog({
   if (form.saving) {
     api.post("/nutemployee", form.employee).then((response) => {
       onFormSave({ ...form, saving: false });
+      onClickOutside();
     });
   }
 
