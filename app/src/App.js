@@ -1,8 +1,11 @@
-import "./App.sass";
+import "./App.scss";
 import { Redirect, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import { getCurrentTheme } from "./themeColors";
 
 function App() {
+  console.log(getCurrentTheme());
+
   return (
     <div className="App">
       <Switch>

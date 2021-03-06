@@ -1,0 +1,10 @@
+@mixin generateThemeJSExports($themeName, $newThemeMap) {
+  $themes: append($themes, $themeName, $separator: comma) !global;
+
+  :export {
+    themes: $themes;
+    @each $key, $value in $newThemeMap {
+      theme_#{$themeName}_#{$key}: $value;
+    }
+  }
+}
