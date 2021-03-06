@@ -1,0 +1,16 @@
+@use "../../themes/colors.scss" as colors;
+
+.create-employee-container {
+  padding: 1em;
+  border-radius: 15px;
+
+  h1 {
+    color: colors.$primary;
+    margin: 0 10px;
+  }
+}
+
+#create-employee-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}

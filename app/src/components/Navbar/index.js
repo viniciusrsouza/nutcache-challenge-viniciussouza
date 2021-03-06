@@ -1,17 +1,18 @@
 import "./styles.scss";
-import { Search, Add } from "react-ionicons";
+import { FaPlus, FaSearch } from "react-icons/fa";
 
-export default function Navbar() {
+export default function Navbar({ context }) {
   return (
     <div id="navbar-container">
       <div id="navbar-search-bar">
-        <div className="navbar-icon">
-          <Search color="#f6f6f6" height="32px" width="32px" />
-        </div>
+        <FaSearch className="navbar-icon" />
         <input type="text" id="navbar-search-bar-input" />
       </div>
-      <div className="navbar-icon">
-        <Add color="#f6f6f6" height="32px" width="32px" />
+      <div>
+        <FaPlus
+          className="navbar-icon"
+          onClick={() => context.setCreateDialog(true)}
+        />
       </div>
     </div>
   );

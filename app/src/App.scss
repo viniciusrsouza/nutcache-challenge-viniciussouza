@@ -4,6 +4,7 @@
   display: flex;
   width: 100vw;
   height: 100vh;
+  min-width: 30em;
   justify-content: center;
   background: colors.$whiteVariant;
 }

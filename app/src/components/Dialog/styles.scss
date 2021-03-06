@@ -1,0 +1,34 @@
+@use "../../themes/colors.scss" as colors;
+
+.dialog-root {
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  backdrop-filter: blur(4px);
+  transition: 300ms;
+}
+
+.dialog-root-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: 300ms;
+}
+
+.dialog-root-invisible {
+  visibility: hidden;
+  opacity: 0;
+  transition: 300ms;
+}
+
+#dialog-container {
+  margin: auto;
+  width: 60vw;
+  min-width: 20em;
+  max-width: 40em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: colors.$whiteVariant;
+}
