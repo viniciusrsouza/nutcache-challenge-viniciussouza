@@ -3,6 +3,7 @@ import "./styles.scss";
 export default function Dialog({
   children,
   visible,
+  title,
   onClickOutside,
   ...props
 }) {
@@ -16,6 +17,12 @@ export default function Dialog({
         id="dialog-container"
         onClick={(event) => event.stopPropagation()}
       >
+        <div className="title">
+          <h1>{title}</h1>
+          <h2 className="button" onClick={onClickOutside}>
+            {"X"}
+          </h2>
+        </div>
         {children}
       </div>
     </div>

@@ -11,3 +11,9 @@ export function onFormSave(form) {
     form,
   };
 }
+
+export function resetEmployee() {
+  return {
+    type: "RESET_EMPLOYEE",
+  };
+}

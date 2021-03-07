@@ -15,7 +15,12 @@ function Navbar({ dialogs, toggleDialog }) {
       <div>
         <FaPlus
           className="navbar-icon"
-          onClick={() => toggleDialog({ ...dialogs, employeeForm: true })}
+          onClick={() =>
+            toggleDialog({
+              ...dialogs,
+              employeeForm: { visible: true, employee: null },
+            })
+          }
         />
       </div>
     </div>

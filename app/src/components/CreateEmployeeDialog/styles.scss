@@ -1,72 +1,8 @@
 @use "../../themes/colors.scss" as colors;
 
 .create-employee-container {
-  padding: 1em;
-  border-radius: 15px;
-
   form {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-
-  h1 {
-    color: colors.$primary;
-    margin: 0 10px;
-  }
-
-  h2 {
-    width: 1em;
-    height: 1em;
-    line-height: 1em;
-    font-size: 1em;
-    padding: 0.3em;
-    margin: 0 10px;
-    border-radius: 20px;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-  }
-
-  .title {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  button {
-    display: flex;
-    width: 250px;
-    padding: 0.8em;
-    margin: auto;
-    outline: none;
-    border: none;
-    border-radius: 30px;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1em;
-
-    * {
-      padding: 0 4px;
-    }
-  }
-
-  .button {
-    background-color: colors.$primary;
-    color: colors.$whiteVariant;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
-    transition: 300ms;
-
-    &:hover {
-      background-color: colors.$primary-focus;
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3),
-        0 3px 10px 0 rgba(0, 0, 0, 0.3);
-      transition: 300ms;
-    }
-
-    &:active {
-      background-color: colors.$primary;
-      box-shadow: none;
-      transition: 300ms;
-    }
   }
 }

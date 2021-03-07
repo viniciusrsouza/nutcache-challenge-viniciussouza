@@ -18,10 +18,12 @@ const actions = {
     employee: employee,
   }),
   ON_FORM_SAVE: (_, { form }) => {
-    console.log("form saving", form.saving);
     if (!form.saving) {
       return INIT;
     } else return form;
+  },
+  RESET_EMPLOYEE: (state, _) => {
+    return { ...state, employee: INIT.employee };
   },
 };
 

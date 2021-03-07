@@ -8,6 +8,7 @@ function FormField({
   form,
   onUpdateEmployee,
   onFormSave,
+  resetEmployee,
   FormIcon,
   children,
   name,
@@ -16,7 +17,6 @@ function FormField({
   const { employee } = form;
 
   const onChange = ({ target }) => {
-    console.log("text", target.value);
     employee[name] = target.value;
     onUpdateEmployee(employee);
   };

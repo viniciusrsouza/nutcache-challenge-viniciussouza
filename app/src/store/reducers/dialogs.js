@@ -1,6 +1,12 @@
 const INIT = {
-  employeeForm: false,
-  deleteEmployee: false,
+  employeeForm: {
+    visible: false,
+    employee: null,
+  },
+  deleteEmployee: {
+    visible: false,
+    user: null,
+  },
 };
 
 const actions = {
@@ -8,7 +14,6 @@ const actions = {
 };
 
 export default function dialogs(state = INIT, action) {
-  console.log(action);
   const callback = actions[action.type];
   if (callback) return callback(state, action);
   return state;

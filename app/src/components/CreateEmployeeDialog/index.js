@@ -21,37 +21,55 @@ import { useEffect } from "react";
 
 function CreateEmployeeDialog({
   form,
+  employee,
   onUpdateEmployee,
   onFormSave,
+  resetEmployee,
   onClickOutside,
   ...props
 }) {
   useEffect(() => {
+    if (employee && employee._id !== form.employee._id) {
+      onUpdateEmployee(employee);
+    } else if (!employee && form.employee._id) {
+      resetEmployee();
+    }
+  });
+
+  useEffect(() => {
     if (form.saving) {
-      console.log("sending");
-      api.post("/nutemployee", form.employee).then((_) => {
-        onFormSave({ ...form, saving: false });
-        onClickOutside();
-      });
+      if (form.employee._id) {
+        api
+          .put(`/nutemployee/${form.employee._id}/`, form.employee)
+          .then(() => {})
+          .catch(() => {})
+          .finally(() => {
+            onFormSave({ ...form, saving: false });
+            onClickOutside();
+          });
+      } else {
+        api
+          .post("/nutemployee/", form.employee)
+          .then((_) => {
+            onFormSave({ ...form, saving: false });
+            onClickOutside();
+          })
+          .catch(() => {})
+          .finally(() => {
+            onFormSave({ ...form, saving: false });
+            onClickOutside();
+          });
+      }
     }
   }, [form, onFormSave, onClickOutside]);
-
-  let dismiss = () => {
-    if (!form.saving) onClickOutside();
-  };
 
   return (
     <Dialog
       className="create-employee-container"
-      onClickOutside={dismiss}
+      title={form.employee._id ? "Edit Employee" : "Create Employee"}
+      onClickOutside={onClickOutside}
       {...props}
     >
-      <div className="title">
-        <h1>Add Employee</h1>
-        <h2 className="button" onClick={dismiss}>
-          {"X"}
-        </h2>
-      </div>
       <form>
         <FormField
           FormIcon={FaUser}
@@ -106,7 +124,10 @@ function CreateEmployeeDialog({
   );
 }
 
-const mapStateToProps = (state) => ({ form: state.form });
+const mapStateToProps = (state) => ({
+  form: state.form,
+  employee: state.dialogs.employeeForm.employee,
+});
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(FormActions, dispatch);

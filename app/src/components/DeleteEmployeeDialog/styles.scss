@@ -1,0 +1,11 @@
+@use "../../themes/colors.scss" as colors;
+
+.employee-data {
+  color: colors.$primary;
+  font-weight: bold;
+}
+
+.dialog-text {
+  font-size: 1.2em;
+  padding: 0.6em;
+}

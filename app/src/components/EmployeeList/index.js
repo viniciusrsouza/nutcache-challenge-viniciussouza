@@ -1,22 +1,29 @@
 import "./styles.scss";
-import { connect } from "react-redux";
 import { FaEllipsisH } from "react-icons/fa";
 import DropdownIcon from "../DropdownIcon";
 
-function EmployeeList({ employees, ...props }) {
-  console.log(employees);
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as DialogActions from "../../store/actions/dialogs";
 
+function EmployeeList({ employees, dialogs, toggleDialog, ...props }) {
   const OPTIONS = {
-    edit: () => {
-      console.log("editing");
+    edit: (employee) => {
+      toggleDialog({
+        ...dialogs,
+        employeeForm: { visible: true, employee: employee },
+      });
     },
-    delete: () => {
-      console.log("deleting");
+    delete: (employee) => {
+      toggleDialog({
+        ...dialogs,
+        deleteEmployee: { visible: true, employee: employee },
+      });
     },
   };
 
   return (
-    <div className="emplyee-list-container">
+    <div className="employee-list-container">
       <table>
         <thead>
           <tr>
@@ -46,7 +53,7 @@ function EmployeeList({ employees, ...props }) {
                 <DropdownIcon
                   Icon={FaEllipsisH}
                   options={Object.keys(OPTIONS)}
-                  onClickOption={(option) => OPTIONS[option]()}
+                  onClickOption={(option) => OPTIONS[option](employee)}
                 />
               </td>
             </tr>
@@ -57,6 +64,12 @@ function EmployeeList({ employees, ...props }) {
   );
 }
 
-const mapStateToProps = (state) => ({ employees: state.employees });
+const mapStateToProps = (state) => ({
+  employees: state.employees,
+  dialogs: state.dialogs,
+});
 
-export default connect(mapStateToProps)(EmployeeList);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(DialogActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeList);
