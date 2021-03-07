@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const db = require("./database/config");
-const routes = require("./routes");
+const routes = require("./router");
 const { API_PORT = "3000" } = process.env;
 
 class Api {
