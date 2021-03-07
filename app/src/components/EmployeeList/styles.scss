@@ -1,0 +1,46 @@
+@use "../../themes/colors.scss" as colors;
+
+.emplyee-list-container {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
+      padding: 0.5em;
+      color: colors.$whiteVariant;
+      background-color: colors.$primary;
+      text-align: start;
+    }
+
+    tbody {
+      tr {
+        border: 1px solid lightgray;
+        transition: 300ms;
+
+        &:hover {
+          background: colors.$whiteVariant-focus;
+          transition: 300ms;
+        }
+      }
+      td {
+        padding: 1em 0.5em;
+      }
+    }
+
+    .column-end {
+      display: flex;
+      flex-direction: row-reverse;
+      margin-right: 1em;
+    }
+
+    .column-start {
+      display: flex;
+      flex-direction: row;
+      margin-left: 1em;
+    }
+
+    .checkbox {
+      border-radius: 20px;
+    }
+  }
+}

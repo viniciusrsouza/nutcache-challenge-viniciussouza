@@ -1,17 +1,30 @@
-import CreateEmployeeDialog from "../../components/CreateEmployeeDialog";
-import Navbar from "../../components/Navbar";
-import { useHomeContext } from "./context";
 import "./styles.scss";
 
-export default function Home() {
-  const context = useHomeContext();
+import CreateEmployeeDialog from "../../components/CreateEmployeeDialog";
+import EmployeeList from "../../components/EmployeeList";
+import Navbar from "../../components/Navbar";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as DialogActions from "../../store/actions/dialogs";
+
+function Home({ state, toggleDialog }) {
   return (
     <div id="home-container">
-      <Navbar context={context} />
+      <Navbar />
+      <EmployeeList />
       <CreateEmployeeDialog
-        visible={context.createDialog}
-        onClickOutside={() => context.setCreateDialog(false)}
+        visible={state.dialogs.employeeForm}
+        onClickOutside={() =>
+          toggleDialog({ ...state.dialogs, employeeForm: false })
+        }
       />
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({ state: state });
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(DialogActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

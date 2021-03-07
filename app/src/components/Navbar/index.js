@@ -1,7 +1,11 @@
 import "./styles.scss";
 import { FaPlus, FaSearch } from "react-icons/fa";
 
-export default function Navbar({ context }) {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as DialogActions from "../../store/actions/dialogs";
+
+function Navbar({ dialogs, toggleDialog }) {
   return (
     <div id="navbar-container">
       <div id="navbar-search-bar">
@@ -11,9 +15,15 @@ export default function Navbar({ context }) {
       <div>
         <FaPlus
           className="navbar-icon"
-          onClick={() => context.setCreateDialog(true)}
+          onClick={() => toggleDialog({ ...dialogs, employeeForm: true })}
         />
       </div>
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({ dialogs: state.dialogs });
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(DialogActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

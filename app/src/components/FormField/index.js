@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import "./styles.scss";
 
 import { connect } from "react-redux";
@@ -6,7 +5,7 @@ import { bindActionCreators } from "redux";
 import * as FormActions from "../../store/actions/form";
 
 function FormField({
-  employee,
+  form,
   onUpdateEmployee,
   onFormSave,
   FormIcon,
@@ -14,12 +13,14 @@ function FormField({
   name,
   ...props
 }) {
-  const [text, setText] = useState("");
-  useEffect(() => {
-    console.log(employee);
-    employee[name] = text;
+  const { employee } = form;
+
+  const onChange = ({ target }) => {
+    console.log("text", target.value);
+    employee[name] = target.value;
     onUpdateEmployee(employee);
-  }, [text, employee, name, onUpdateEmployee]);
+  };
+
   return (
     <div className="form-field">
       <FormIcon className="form-icon" />
@@ -27,14 +28,14 @@ function FormField({
         {...props}
         name={name}
         className="input"
-        value={text}
-        onChange={({ target }) => setText(target.value)}
+        value={employee[name] || ""}
+        onChange={onChange}
       />
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({ employee: state.form.employee });
+const mapStateToProps = (state) => ({ form: state.form });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(FormActions, dispatch);

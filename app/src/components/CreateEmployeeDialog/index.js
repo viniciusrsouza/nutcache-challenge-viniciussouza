@@ -13,11 +13,11 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import FormField from "../FormField";
-import { useEffect } from "react";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as FormActions from "../../store/actions/form";
+import { useEffect } from "react";
 
 function CreateEmployeeDialog({
   form,
@@ -27,15 +27,14 @@ function CreateEmployeeDialog({
   ...props
 }) {
   useEffect(() => {
-    //if (form.saving) onFormSave({ ...form, saving: false });
-  });
-
-  if (form.saving) {
-    api.post("/nutemployee", form.employee).then((response) => {
-      onFormSave({ ...form, saving: false });
-      onClickOutside();
-    });
-  }
+    if (form.saving) {
+      console.log("sending");
+      api.post("/nutemployee", form.employee).then((_) => {
+        onFormSave({ ...form, saving: false });
+        onClickOutside();
+      });
+    }
+  }, [form, onFormSave, onClickOutside]);
 
   let dismiss = () => {
     if (!form.saving) onClickOutside();
