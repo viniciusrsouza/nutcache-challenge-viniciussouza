@@ -5,15 +5,8 @@ export function onUpdateEmployee(employee) {
   };
 }
 
-export function onFormSave(form) {
+export function onFormSave() {
   return {
     type: "ON_FORM_SAVE",
-    form,
-  };
-}
-
-export function resetEmployee() {
-  return {
-    type: "RESET_EMPLOYEE",
   };
 }

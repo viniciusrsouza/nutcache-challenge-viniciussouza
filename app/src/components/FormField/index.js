@@ -1,20 +1,12 @@
 import "./styles.scss";
 
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { useSelector } from "react-redux";
 import * as FormActions from "../../store/actions/form";
+import { useAction } from "../../store/actions";
 
-function FormField({
-  form,
-  onUpdateEmployee,
-  onFormSave,
-  resetEmployee,
-  FormIcon,
-  children,
-  name,
-  ...props
-}) {
-  const { employee } = form;
+export default function FormField({ FormIcon, children, name, ...props }) {
+  const employee = useSelector((state) => state.form.employee);
+  const onUpdateEmployee = useAction(FormActions.onUpdateEmployee);
 
   const onChange = ({ target }) => {
     employee[name] = target.value;
@@ -34,10 +26,3 @@ function FormField({
     </div>
   );
 }
-
-const mapStateToProps = (state) => ({ form: state.form });
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(FormActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(FormField);

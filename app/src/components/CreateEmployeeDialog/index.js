@@ -14,54 +14,59 @@ import {
 } from "react-icons/fa";
 import FormField from "../FormField";
 
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { batch, useSelector } from "react-redux";
 import * as FormActions from "../../store/actions/form";
+import * as EmployeesActions from "../../store/actions/employees";
 import { useEffect } from "react";
+import { useAction } from "../../store/actions";
 
-function CreateEmployeeDialog({
-  form,
-  employee,
-  onUpdateEmployee,
-  onFormSave,
-  resetEmployee,
-  onClickOutside,
-  ...props
-}) {
+export default function CreateEmployeeDialog({ onClickOutside, ...props }) {
+  const { form, employee } = useSelector((state) => ({
+    form: state.form,
+    employee: state.dialogs.employeeForm.employee,
+  }));
+
+  const onUpdateEmployee = useAction(FormActions.onUpdateEmployee);
+  const onFormSave = useAction(FormActions.onFormSave);
+  const refreshEmployees = useAction(EmployeesActions.refreshEmployees);
+
   useEffect(() => {
     if (employee && employee._id !== form.employee._id) {
+      console.log("entrou");
       onUpdateEmployee(employee);
     } else if (!employee && form.employee._id) {
-      resetEmployee();
+      console.log("entrou2");
+      onFormSave();
     }
   });
 
-  useEffect(() => {
-    if (form.saving) {
-      if (form.employee._id) {
-        api
-          .put(`/nutemployee/${form.employee._id}/`, form.employee)
-          .then(() => {})
-          .catch(() => {})
-          .finally(() => {
-            onFormSave({ ...form, saving: false });
-            onClickOutside();
+  const save = () => {
+    if (form.employee._id) {
+      api
+        .put(`/nutemployee/${form.employee._id}/`, form.employee)
+        .then(() => {})
+        .catch(() => {})
+        .finally(() => {
+          batch(() => {
+            onFormSave();
+            refreshEmployees({ list: null });
           });
-      } else {
-        api
-          .post("/nutemployee/", form.employee)
-          .then((_) => {
-            onFormSave({ ...form, saving: false });
-            onClickOutside();
-          })
-          .catch(() => {})
-          .finally(() => {
-            onFormSave({ ...form, saving: false });
-            onClickOutside();
+          onClickOutside();
+        });
+    } else {
+      api
+        .post("/nutemployee/", form.employee)
+        .then(() => {})
+        .catch(() => {})
+        .finally(() => {
+          batch(() => {
+            onFormSave();
+            refreshEmployees({ list: null });
           });
-      }
+          onClickOutside();
+        });
     }
-  }, [form, onFormSave, onClickOutside]);
+  };
 
   return (
     <Dialog
@@ -114,25 +119,9 @@ function CreateEmployeeDialog({
           placeholder="Team"
         />
       </form>
-      <button
-        className="button"
-        onClick={() => onFormSave({ ...form, saving: true })}
-      >
+      <button className="button" onClick={save}>
         <FaCheck id="icon" /> <p>Save</p>
       </button>
     </Dialog>
   );
 }
-
-const mapStateToProps = (state) => ({
-  form: state.form,
-  employee: state.dialogs.employeeForm.employee,
-});
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(FormActions, dispatch);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateEmployeeDialog);

@@ -1,6 +1,7 @@
 @use "../../themes/colors.scss" as colors;
 
 .employee-list-container {
+  border: 1px solid red;
   table {
     width: 100%;
     border-collapse: collapse;

@@ -1,11 +1,14 @@
 import "./styles.scss";
 import { FaPlus, FaSearch } from "react-icons/fa";
 
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import { useSelector } from "react-redux";
 import * as DialogActions from "../../store/actions/dialogs";
+import { useAction } from "../../store/actions";
 
-function Navbar({ dialogs, toggleDialog }) {
+export default function Navbar() {
+  const dialogs = useSelector((state) => state.dialogs);
+  const toggleDialog = useAction(DialogActions.toggleDialog);
+
   return (
     <div id="navbar-container">
       <div id="navbar-search-bar">
@@ -26,9 +29,3 @@ function Navbar({ dialogs, toggleDialog }) {
     </div>
   );
 }
-
-const mapStateToProps = (state) => ({ dialogs: state.dialogs });
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(DialogActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

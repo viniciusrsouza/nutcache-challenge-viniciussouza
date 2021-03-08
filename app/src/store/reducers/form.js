@@ -9,7 +9,6 @@ const INIT = {
     start_date: "",
     team: "",
   },
-  saving: false,
 };
 
 const actions = {
@@ -17,14 +16,18 @@ const actions = {
     ...state,
     employee: employee,
   }),
-  ON_FORM_SAVE: (_, { form }) => {
-    if (!form.saving) {
-      return INIT;
-    } else return form;
-  },
-  RESET_EMPLOYEE: (state, _) => {
-    return { ...state, employee: INIT.employee };
-  },
+  ON_FORM_SAVE: () => ({
+    employee: {
+      _id: null,
+      name: "",
+      date_of_birth: "",
+      gender: "",
+      email: "",
+      cpf: "",
+      start_date: "",
+      team: "",
+    },
+  }),
 };
 
 export default function form(state = INIT, action) {

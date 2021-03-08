@@ -2,11 +2,33 @@ import "./styles.scss";
 import { FaEllipsisH } from "react-icons/fa";
 import DropdownIcon from "../DropdownIcon";
 
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import * as DialogActions from "../../store/actions/dialogs";
+import * as EmployeesActions from "../../store/actions/employees";
+import { useAction } from "../../store/actions";
 
-function EmployeeList({ employees, dialogs, toggleDialog, ...props }) {
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { api } from "../../services/ApiService";
+
+export default function EmployeeList({ ...props }) {
+  const { employees, dialogs } = useSelector((state) => ({
+    employees: state.employees,
+    dialogs: state.dialogs,
+  }));
+
+  const toggleDialog = useAction(DialogActions.toggleDialog);
+  const refreshEmployees = useAction(EmployeesActions.refreshEmployees);
+
+  useEffect(() => {
+    if (!employees.list) {
+      api.get("/nutemployee").then((res) => {
+        if (res.data) {
+          refreshEmployees({ list: res.data });
+        }
+      });
+    }
+  });
+
   const OPTIONS = {
     edit: (employee) => {
       toggleDialog({
@@ -23,7 +45,7 @@ function EmployeeList({ employees, dialogs, toggleDialog, ...props }) {
   };
 
   return (
-    <div className="employee-list-container">
+    <div {...props} className="employee-list-container">
       <table>
         <thead>
           <tr>
@@ -40,7 +62,7 @@ function EmployeeList({ employees, dialogs, toggleDialog, ...props }) {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
+          {employees.list?.map((employee) => (
             <tr key={employee._id}>
               <td className="column-start">
                 <input type="checkbox" />
@@ -63,13 +85,3 @@ function EmployeeList({ employees, dialogs, toggleDialog, ...props }) {
     </div>
   );
 }
-
-const mapStateToProps = (state) => ({
-  employees: state.employees,
-  dialogs: state.dialogs,
-});
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(DialogActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(EmployeeList);

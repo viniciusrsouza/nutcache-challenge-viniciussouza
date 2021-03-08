@@ -4,29 +4,42 @@ import CreateEmployeeDialog from "../../components/CreateEmployeeDialog";
 import EmployeeList from "../../components/EmployeeList";
 import Navbar from "../../components/Navbar";
 
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as DialogActions from "../../store/actions/dialogs";
+import * as DialogsActions from "../../store/actions/dialogs";
+import * as EmployeesActions from "../../store/actions/employees";
+
+import { batch, useSelector } from "react-redux";
 import DeleteEmployeeDialog from "../../components/DeleteEmployeeDialog";
 import { api } from "../../services/ApiService";
+import { useCallback } from "react";
+import { useAction } from "../../store/actions";
 
-function Home({ state, toggleDialog }) {
-  const onDismissDelete = () => {
-    toggleDialog({
-      ...state.dialogs,
-      deleteEmployee: { visible: false, employee: null },
-    });
-  };
+export default function Home() {
+  const state = useSelector((state) => state);
+
+  const toggleDialog = useAction(DialogsActions.toggleDialog);
+  const refreshEmployees = useAction(EmployeesActions.refreshEmployees);
+
+  const onDismissDelete = useCallback(
+    () =>
+      batch(() => {
+        toggleDialog({
+          ...state.dialogs,
+          deleteEmployee: { visible: false, employee: null },
+        });
+        refreshEmployees({ list: null });
+      }),
+    [refreshEmployees, toggleDialog, state]
+  );
 
   const onClickDelete = (employee) => {
-    api.delete(`employee/${employee._id}/`).then(() => {
+    api.delete(`nutemployee/${employee._id}/`).then(() => {
       onDismissDelete();
     });
   };
   return (
     <div id="home-container">
       <Navbar />
-      <EmployeeList />
+      <EmployeeList className="employee-list" />
       <CreateEmployeeDialog
         visible={state.dialogs.employeeForm.visible}
         onClickOutside={() =>
@@ -44,9 +57,3 @@ function Home({ state, toggleDialog }) {
     </div>
   );
 }
-
-const mapStateToProps = (state) => ({ state: state });
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(DialogActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);

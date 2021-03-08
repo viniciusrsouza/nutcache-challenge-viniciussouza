@@ -1,19 +1,14 @@
 import "./styles.scss";
 
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as DialogActions from "../../store/actions/dialogs";
+import { useSelector } from "react-redux";
 import Dialog from "../Dialog";
 import { FaTrash } from "react-icons/fa";
 
-function DeleteEmployeeDialog({
-  employees,
-  dialogs,
-  onClickDelete,
-  toggleDialog,
-  ...props
-}) {
-  const employee = dialogs.deleteEmployee.employee;
+export default function DeleteEmployeeDialog({ onClickDelete, ...props }) {
+  const { employee } = useSelector((state) => ({
+    employee: state.dialogs.deleteEmployee.employee,
+  }));
+
   return (
     <Dialog title="Delete Employee" {...props}>
       <p className="dialog-text">
@@ -29,16 +24,3 @@ function DeleteEmployeeDialog({
     </Dialog>
   );
 }
-
-const mapStateToProps = (state) => ({
-  dialogs: state.dialogs,
-  employees: state.employees,
-});
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(DialogActions, dispatch);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DeleteEmployeeDialog);
