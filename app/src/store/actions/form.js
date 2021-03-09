@@ -10,3 +10,10 @@ export function onFormSave() {
     type: "ON_FORM_SAVE",
   };
 }
+
+export function onError(errors) {
+  return {
+    type: "ON_ERROR",
+    errors,
+  };
+}

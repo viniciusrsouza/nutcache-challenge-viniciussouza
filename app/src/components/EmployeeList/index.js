@@ -62,7 +62,7 @@ export default function EmployeeList({ ...props }) {
           </tr>
         </thead>
         <tbody>
-          {employees.list?.map((employee) => (
+          {employees.list?.map((employee, index) => (
             <tr key={employee._id}>
               <td className="column-start">
                 <input type="checkbox" />

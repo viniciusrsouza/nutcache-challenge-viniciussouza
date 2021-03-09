@@ -9,6 +9,7 @@ const INIT = {
     start_date: "",
     team: "",
   },
+  errors: {},
 };
 
 const actions = {
@@ -16,7 +17,8 @@ const actions = {
     ...state,
     employee: employee,
   }),
-  ON_FORM_SAVE: () => ({
+  ON_FORM_SAVE: (state) => ({
+    ...state,
     employee: {
       _id: null,
       name: "",
@@ -27,6 +29,10 @@ const actions = {
       start_date: "",
       team: "",
     },
+  }),
+  ON_ERROR: (state, { errors }) => ({
+    employee: state.employee,
+    errors: errors,
   }),
 };
 

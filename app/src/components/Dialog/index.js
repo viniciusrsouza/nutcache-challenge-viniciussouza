@@ -19,7 +19,7 @@ export default function Dialog({
       >
         <div className="title">
           <h1>{title}</h1>
-          <h2 className="button" onClick={onClickOutside}>
+          <h2 className="button button-close" onClick={onClickOutside}>
             {"X"}
           </h2>
         </div>

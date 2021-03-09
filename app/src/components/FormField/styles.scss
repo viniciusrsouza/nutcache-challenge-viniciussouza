@@ -3,29 +3,89 @@
 .form-field {
   display: flex;
   background-color: colors.$whiteVariant;
-  border-radius: 30px;
-  margin: 10px;
+  margin: 15px;
   padding: 0.4em;
-  border: 1px solid colors.$primary;
+  border-bottom: 1px solid colors.$primary;
 
   .input {
-    border: none;
-    outline: none;
+    border: 0px;
+    outline: 0px;
     width: 100%;
     background-color: transparent;
   }
+
+  .input[type="number"]::-webkit-inner-spin-button,
+  .input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .input:hover ~ .pseudo-div {
+    height: 100px;
+    width: 100px;
+    background-color: gray;
+  }
+
+  .form-icon {
+    width: 24px;
+    height: 24px;
+    color: colors.$primary;
+    vertical-align: middle;
+    padding-right: 10px;
+    transition: 100ms;
+    cursor: text;
+  }
+
+  .pseudo-div {
+    position: "relative";
+    width: 0;
+    height: 0;
+  }
+
+  p {
+    color: colors.$primary;
+    font-weight: bold;
+    position: relative;
+    top: 0;
+    width: 200px;
+    transition: 100ms;
+  }
+
+  .focus,
+  .filled {
+    top: -1.2em;
+    transition: 100ms ease-in-out;
+  }
+
+  .focus,
+  .form-icon.focus {
+    color: colors.$primary-focus;
+    transition: 100ms;
+  }
+
+  .error-message {
+    left: -2.5em;
+    top: -1.2em;
+    z-index: -1;
+    font-size: 0.8em;
+    transition: 100ms;
+  }
+
+  .error-message-visible {
+    top: 0.7em;
+    z-index: 1;
+    transition: 100ms;
+  }
 }
 
-.form-field-error:hover {
+.form-field-error {
   animation: error-shake 0.5s;
-}
+  border-color: colors.$error;
 
-.form-icon {
-  width: 24px;
-  height: 24px;
-  padding: 0 8px;
-  color: colors.$primary;
-  vertical-align: middle;
+  .form-icon,
+  p {
+    color: colors.$error;
+  }
 }
 
 @keyframes error-shake {

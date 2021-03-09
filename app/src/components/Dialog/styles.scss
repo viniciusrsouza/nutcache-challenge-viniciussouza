@@ -10,24 +10,6 @@
   overflow: auto;
   backdrop-filter: blur(4px);
   transition: 300ms;
-
-  button {
-    display: flex;
-    width: 250px;
-    padding: 0.8em;
-    margin: 1em auto;
-    outline: none;
-    border: none;
-    border-radius: 30px;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1em;
-
-    * {
-      padding: 0 4px;
-    }
-  }
 }
 
 .dialog-root-visible {
@@ -71,6 +53,21 @@
   color: colors.$whiteVariant;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.19);
   transition: 300ms;
+  display: flex;
+  width: 100%;
+  padding: 0.8em;
+  margin: 1em auto;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1em;
+
+  * {
+    padding: 0 4px;
+  }
 
   &:hover {
     background-color: colors.$primary-focus;
@@ -83,6 +80,10 @@
     box-shadow: none;
     transition: 300ms;
   }
+}
+
+.button-close {
+  border-radius: 30px;
 }
 
 #dialog-container {
