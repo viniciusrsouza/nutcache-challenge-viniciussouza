@@ -35,7 +35,7 @@ $ cd nutcache-challenge-viniciussouza
 $ docker-compose up --build
 ```
 
-Nginx will listen to `localhost` and redirect to the application.
+Nginx will listen to `localhost:80` and redirect to the application.
 
 ## Details of the solution
 
