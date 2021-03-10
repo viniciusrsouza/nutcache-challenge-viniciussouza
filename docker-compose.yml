@@ -19,7 +19,8 @@ services:
       context: ./api
       dockerfile: dockerfile
     environment:
-      - PORT=3000
+      PORT: 3000
+      WAIT_HOSTS: db:27017
     depends_on:
       - db
     ports:
