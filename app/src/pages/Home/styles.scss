@@ -1,15 +1,17 @@
 #home-container {
-  border: 1px solid blue;
-  margin-top: 3em;
-  width: 80vw;
-  max-width: 100em;
+  width: 100%;
+  max-width: 90em;
   min-width: 30em;
+  min-height: 100vh;
+}
+
+body {
+  border: 4px solid purple;
+}
+
+#home-content {
+  border-radius: 10px 10px 0 0;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   display: flex;
   flex-direction: column;
-}
-
-.employee-list {
-  flex: 0 1 auto;
-  border: 10px solid green;
 }

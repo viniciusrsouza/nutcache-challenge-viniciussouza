@@ -1,0 +1,80 @@
+@use "../../themes/colors.scss" as colors;
+
+.employee-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 100ms;
+  border: 1px solid colors.$darker_bg;
+
+  &:hover {
+    background: colors.$darker_bg;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 5px 0 rgba(0, 0, 0, 0.19);
+    transition: 200ms;
+  }
+
+  .data-container {
+    padding: 1em;
+    max-width: 16em;
+  }
+
+  .text {
+    font-size: 1.2em;
+  }
+
+  .icon {
+    min-width: 3em;
+    min-height: 3em;
+    width: 3em;
+    height: 3em;
+    padding: 1em;
+    color: colors.$primary;
+    vertical-align: middle;
+    align-self: center;
+  }
+
+  .name {
+    font-weight: bolder;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 16em;
+    text-overflow: ellipsis;
+    color: colors.$primary;
+    max-lines: 1;
+  }
+  .email {
+    color: colors.$primary;
+    text-decoration: underline;
+  }
+  .start_date {
+    grid-area: S;
+  }
+  .team {
+    grid-area: T;
+  }
+}
+
+.clickable-icon-container {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2em;
+  border-radius: 20px;
+  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
+  transition: 100ms;
+
+  &:hover {
+    background-color: #00000008;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 3px 0 rgba(0, 0, 0, 0.19);
+    transition: 100ms;
+  }
+
+  .clickable-icon {
+    width: 1.5em;
+    height: 1.5em;
+    padding: 0.6em;
+    color: colors.$primary;
+    vertical-align: middle;
+  }
+}

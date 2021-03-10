@@ -1,21 +1,34 @@
 @use '../../themes/colors.scss' as colors;
 
-#navbar-container {
+.navbar-container {
   display: flex;
-  background-color: colors.$primary;
+  background: colors.$primary_bg;
   justify-content: space-between;
+  border-radius: 10px 10px 0 0;
+  padding: 0.8em;
 }
 
-#navbar-search-bar {
-  width: 100%;
+.navbar-title {
+  color: colors.$whiteVariant;
+  font-size: 2em;
+  line-height: 2em;
+  padding-left: 0.5em;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.navbar-search-bar {
   display: inline-flex;
   align-items: center;
 }
 
-#navbar-search-bar-input {
+.navbar-search-bar-input {
   outline: none;
   border: none;
+  background: none;
+  border-bottom: 1px solid red;
   width: 15em;
+  color: colors.$whiteVariant;
   height: 1.5em;
   font-size: 1em;
 }
@@ -23,14 +36,37 @@
 .navbar-icon {
   height: 24px;
   width: 24px;
-  padding: 0.2em;
   margin: 0 0.5em;
   transition: 300ms;
   vertical-align: middle;
   color: colors.$whiteVariant;
+}
+
+.add-container {
+  height: 2em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: colors.$whiteVariant;
+  font-weight: bold;
+  font-size: 1.2em;
+  align-self: center;
+  border-radius: 5px;
+  padding: 0.2em 0.5em;
+  margin: 0 1em;
+  box-shadow: none;
+  background: none;
+  transition: 200ms;
+  cursor: pointer;
 
   &:hover {
-    background: colors.$primary-focus;
-    transition: 300ms;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3), 0 3px 10px 0 rgba(0, 0, 0, 0.3);
+    background: colors.$darker_bg;
+    transition: 200ms;
+  }
+
+  &:active {
+    box-shadow: none;
+    transition: 200ms;
   }
 }

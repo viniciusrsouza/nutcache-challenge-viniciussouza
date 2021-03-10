@@ -38,22 +38,32 @@ export default function Home() {
   };
   return (
     <div id="home-container">
-      <Navbar />
-      <EmployeeList className="employee-list" />
-      <CreateEmployeeDialog
-        visible={state.dialogs.employeeForm.visible}
-        onClickOutside={() =>
-          toggleDialog({
-            ...state.dialogs,
-            employeeForm: { visible: false, employee: state.dialogs.employee },
-          })
-        }
+      <img
+        className="logo"
+        src={`${process.env.PUBLIC_URL}/nutcache-logo.png`}
+        alt="Nutcache"
       />
-      <DeleteEmployeeDialog
-        visible={state.dialogs.deleteEmployee.visible}
-        onClickOutside={onDismissDelete}
-        onClickDelete={onClickDelete}
-      />
+      <div id="home-content">
+        <Navbar />
+        <EmployeeList className="employee-list" />
+        <CreateEmployeeDialog
+          visible={state.dialogs.employeeForm.visible}
+          onClickOutside={() =>
+            toggleDialog({
+              ...state.dialogs,
+              employeeForm: {
+                visible: false,
+                employee: state.dialogs.employee,
+              },
+            })
+          }
+        />
+        <DeleteEmployeeDialog
+          visible={state.dialogs.deleteEmployee.visible}
+          onClickOutside={onDismissDelete}
+          onClickDelete={onClickDelete}
+        />
+      </div>
     </div>
   );
 }
