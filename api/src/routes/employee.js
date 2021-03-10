@@ -2,6 +2,9 @@ const express = require("express");
 const employee = require("../models/employee");
 const router = express.Router();
 
+const CPF = require("cpf");
+const EMAIL = require("email-validator");
+
 router.get("/", (req, res) => {
   employee
     .find()
@@ -13,6 +16,15 @@ router.post("/", (req, res) => {
   const _employee = new employee({
     ...req.body,
   });
+
+  if (_employee.cpf && !CPF.isValid(_employee.cpf)) {
+    res.send({ cpf: "not a valid CPF." });
+    return;
+  }
+  if (_employee.email && !EMAIL.validate(_employee.email)) {
+    res.send({ email: "not a valid Email." });
+    return;
+  }
 
   _employee
     .save()

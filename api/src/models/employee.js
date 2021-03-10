@@ -23,6 +23,7 @@ const employeeSchema = new Schema({
   },
   gender: {
     type: String,
+    enum: ["Male", "Female", "Other", "Prefer not to say"],
     required: true,
   },
   email: {
@@ -39,6 +40,7 @@ const employeeSchema = new Schema({
   },
   team: {
     type: String,
+    enum: ["", "Mobile", "Frontend", "Backend"],
     required: false,
   },
 });

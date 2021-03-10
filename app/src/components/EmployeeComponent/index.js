@@ -16,7 +16,7 @@ export default function EmployeeComponent({ employee }) {
 
   const prettyDate = (date) => {
     const [y, m] = date.split("T")[0].split("-");
-    return `${monthToString(parseInt(m))}, ${y}`;
+    return `${monthToString(parseInt(m) - 1)}, ${y}`;
   };
 
   const parseTeam = (team) => {
